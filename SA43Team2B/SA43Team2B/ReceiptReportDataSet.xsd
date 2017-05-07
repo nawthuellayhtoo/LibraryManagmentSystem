@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReceiptReportDataSet" targetNamespace="http://tempuri.org/ReceiptReportDataSet.xsd" xmlns:mstns="http://tempuri.org/ReceiptReportDataSet.xsd" xmlns="http://tempuri.org/ReceiptReportDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Sa43Team2bDBConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Sa43Team2bDBConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SA43Team2B.Properties.Settings.GlobalReference.Default.Sa43Team2bDBConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Sa43Team2bDBConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>Select t.TransactionID,t.BookCode,b.BookTitle,t.MemberID,m.MemberName,t.DateIssue,t.DateDue
+from Transactions t, Books b, Members m
+where t.BookCode=b.BookCode and t.MemberID=m.MemberID and t.TransactionID=(select max(d.TransactionID) from Transactions d)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TransactionID" DataSetColumn="TransactionID" />
+              <Mapping SourceColumn="BookCode" DataSetColumn="BookCode" />
+              <Mapping SourceColumn="BookTitle" DataSetColumn="BookTitle" />
+              <Mapping SourceColumn="MemberID" DataSetColumn="MemberID" />
+              <Mapping SourceColumn="MemberName" DataSetColumn="MemberName" />
+              <Mapping SourceColumn="DateIssue" DataSetColumn="DateIssue" />
+              <Mapping SourceColumn="DateDue" DataSetColumn="DateDue" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReceiptReportDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReceiptReportDataSet" msprop:Generator_UserDSName="ReceiptReportDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TransactionID" msprop:Generator_ColumnVarNameInTable="columnTransactionID" msprop:Generator_ColumnPropNameInRow="TransactionID" msprop:Generator_ColumnPropNameInTable="TransactionIDColumn" msprop:Generator_UserColumnName="TransactionID" type="xs:int" />
+              <xs:element name="BookCode" msprop:Generator_ColumnVarNameInTable="columnBookCode" msprop:Generator_ColumnPropNameInRow="BookCode" msprop:Generator_ColumnPropNameInTable="BookCodeColumn" msprop:Generator_UserColumnName="BookCode" type="xs:int" />
+              <xs:element name="BookTitle" msprop:Generator_ColumnVarNameInTable="columnBookTitle" msprop:Generator_ColumnPropNameInRow="BookTitle" msprop:Generator_ColumnPropNameInTable="BookTitleColumn" msprop:Generator_UserColumnName="BookTitle">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MemberID" msprop:Generator_ColumnVarNameInTable="columnMemberID" msprop:Generator_ColumnPropNameInRow="MemberID" msprop:Generator_ColumnPropNameInTable="MemberIDColumn" msprop:Generator_UserColumnName="MemberID" type="xs:int" />
+              <xs:element name="MemberName" msprop:Generator_ColumnVarNameInTable="columnMemberName" msprop:Generator_ColumnPropNameInRow="MemberName" msprop:Generator_ColumnPropNameInTable="MemberNameColumn" msprop:Generator_UserColumnName="MemberName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DateIssue" msprop:Generator_ColumnVarNameInTable="columnDateIssue" msprop:Generator_ColumnPropNameInRow="DateIssue" msprop:Generator_ColumnPropNameInTable="DateIssueColumn" msprop:Generator_UserColumnName="DateIssue" type="xs:dateTime" />
+              <xs:element name="DateDue" msprop:Generator_ColumnVarNameInTable="columnDateDue" msprop:Generator_ColumnPropNameInRow="DateDue" msprop:Generator_ColumnPropNameInTable="DateDueColumn" msprop:Generator_UserColumnName="DateDue" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:TransactionID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

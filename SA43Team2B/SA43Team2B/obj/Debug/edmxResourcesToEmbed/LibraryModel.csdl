@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Sa43Team2bDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookCode" />
+    </Key>
+    <Property Name="BookCode" Type="Int32" Nullable="false" />
+    <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookGenere" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookAuthor" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookTotalCount" Type="Int16" Nullable="false" />
+    <Property Name="BookPublisher" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookEdition" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="BookAvailableCount" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeeDesignation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeePhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeeAddress" Type="String" MaxLength="65" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeeEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="MemberName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MemberType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MemberPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MemberAddress" Type="String" MaxLength="65" FixedLength="false" Unicode="true" />
+    <Property Name="MemberEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+    </Key>
+    <Property Name="TransactionID" Type="Int32" Nullable="false" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookCode" Type="Int32" Nullable="false" />
+    <Property Name="DateIssue" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateDue" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateReturned" Type="DateTime" Precision="3" />
+    <Property Name="BookLoanStatus" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Transactions1" Relationship="Self.EmployeeID" FromRole="Transactions" ToRole="Transactions1" />
+    <NavigationProperty Name="Transaction1" Relationship="Self.EmployeeID" FromRole="Transactions1" ToRole="Transactions" />
+    <NavigationProperty Name="Transactions11" Relationship="Self.MemberID" FromRole="Transactions" ToRole="Transactions1" />
+    <NavigationProperty Name="Transaction2" Relationship="Self.MemberID" FromRole="Transactions1" ToRole="Transactions" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeePassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="EmployeeID">
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="1" />
+    <End Role="Transactions1" Type="Self.Transaction" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Transactions">
+        <PropertyRef Name="TransactionID" />
+      </Principal>
+      <Dependent Role="Transactions1">
+        <PropertyRef Name="TransactionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MemberID">
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="1" />
+    <End Role="Transactions1" Type="Self.Transaction" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Transactions">
+        <PropertyRef Name="TransactionID" />
+      </Principal>
+      <Dependent Role="Transactions1">
+        <PropertyRef Name="TransactionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Sa43Team2bDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+    <AssociationSet Name="EmployeeID" Association="Self.EmployeeID">
+      <End Role="Transactions" EntitySet="Transactions" />
+      <End Role="Transactions1" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="MemberID" Association="Self.MemberID">
+      <End Role="Transactions" EntitySet="Transactions" />
+      <End Role="Transactions1" EntitySet="Transactions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
